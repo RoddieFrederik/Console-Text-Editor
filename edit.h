@@ -2,8 +2,8 @@
 #include <stdlib.h>
 
 int y, x;
-char mode;
-char * buffer, status, filename;
+char mode; // stores the current mode of the editor
+char * buffer, filename;
 /* move*() functions move the cursor one space*/
 void moveup(); 
 void movedown();
@@ -20,5 +20,5 @@ void printbuffer();
 
 void savefile();
 
-void commandmodeon();
-void commandmodeoff();
+void commandmodeon(); // enable command mode
+void commandmodeoff(); // disable command mode
