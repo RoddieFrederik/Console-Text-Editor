@@ -9,7 +9,8 @@ int main()
 	cbreak();	
 	noecho();
 	keypad(stdscr, true);
-
+	// mode variable is declared in "edit.h"
+	mode = 'i';
 	char read;
 	FILE* file = fopen("file.txt", "r+");
 	
@@ -26,10 +27,14 @@ int main()
 	
 	int choice, y, x;
 	while(true){
+		refresh();
 		choice = getch();
+		getyx(stdscr, y, x);
+		//if insert mode
+		if(mode == 'i')
 		switch(choice){
 			case 27:
-			commandmode();
+			commandmodeon();
 			break;
 			case KEY_LEFT:
 			moveleft();
@@ -44,16 +49,43 @@ int main()
 			movedown();
 			break;
 			case KEY_BACKSPACE:
-			backspace();
+				backspace();
 			break;
 			case 10:
-			insertline();
+			if(mode == 'i')
+				insertline();
+			break;
+			default:
+				insertchar(choice);
+			break;
+		}
+		//if command mode
+		else
+		switch(choice){
+			case KEY_LEFT:
+			moveleft();
+			break;
+			case KEY_RIGHT:
+			moveright();
+			break;	
+			case KEY_UP:
+			moveup();
+			break;
+			case KEY_DOWN:
+			movedown();
+			break;
+			case 'I':
+			commandmodeoff();
 			break;
 			case 'X':
 			deleteline();
 			break;
+			case 'O':
+			insertline();
+			break;
 			default:
-			insertchar(choice);	
+			mvprintw(31, 0, "Invalid Command.");
+			move(y, x);
 			break;
 		}
 	}

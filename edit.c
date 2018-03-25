@@ -41,21 +41,23 @@ void insertchar(char c){
 	insch(c);
 	move(y, x + 1);	
 }
-// handles all command mode input
-void commandmode(){
-	char command;
-	getmaxyx(stdscr, y, x);
-	mvprintw(y, x, "Entering Command Mode");
-	do{
-		command = getch();
-		move(y, x);
-		switch(command){
-			case 'i':
-			printw("Entering Insert Mode.");
-			return;
-			default:
-			mvprintw(y, x, "Invalid Command");
-			break;
-		}
-	}while(true);
+// enable command mode
+void commandmodeon(){
+	getyx(stdscr, y, x);
+	move(30, 0);
+	deleteline();
+	printw("Command Mode: 'I': Enable Insert Mode 'X': Delete Line 'O': Insert Line 'S': Save File");
+	move(y, x);
+	mode = 'c';
 }
+// disable command mode
+void commandmodeoff(){
+	getyx(stdscr, y,x);
+	move(30, 0);
+	deleteline();
+	deleteline();
+	printw("Insert Mode:");
+	move(y, x);
+	mode = 'i';
+}
+	

@@ -20,4 +20,5 @@ void printbuffer();
 
 void savefile();
 
-void commandmode();
+void commandmodeon();
+void commandmodeoff();
