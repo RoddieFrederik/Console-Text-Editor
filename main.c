@@ -6,11 +6,12 @@
 int main()
 {
 	initscr();
-	cbreak();
+	cbreak();	
+	noecho();
 	keypad(stdscr, true);
 
 	char read;
-	FILE* file = fopen("file.txt", "r");
+	FILE* file = fopen("file.txt", "r+");
 	
 	if (file == NULL){
 		printw("No file..\n");
@@ -42,10 +43,13 @@ int main()
 			case 'x':
 			deleteline();
 			break;
+			case KEY_BACKSPACE:
+			backspace();
+			break;
 			case 10:
 			insertline();
 			break;
-			default:
+			default:	
 			break;
 		}
 	}
