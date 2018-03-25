@@ -28,6 +28,9 @@ int main()
 	while(true){
 		choice = getch();
 		switch(choice){
+			case 27:
+			commandmode();
+			break;
 			case KEY_LEFT:
 			moveleft();
 			break;
@@ -40,16 +43,17 @@ int main()
 			case KEY_DOWN:
 			movedown();
 			break;
-			case 'x':
-			deleteline();
-			break;
 			case KEY_BACKSPACE:
 			backspace();
 			break;
 			case 10:
 			insertline();
 			break;
-			default:	
+			case 'X':
+			deleteline();
+			break;
+			default:
+			insertchar(choice);	
 			break;
 		}
 	}

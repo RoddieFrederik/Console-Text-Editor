@@ -14,7 +14,10 @@ void deleteline(); // delete current line
 void backspace(); // delete the character to the left of the cursor
 
 void insertline(); // insert a line at current position
+void insertchar(char c); // inserts a character 'c' at current position
 
 void printbuffer(); 
 
 void savefile();
+
+void commandmode();

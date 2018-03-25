@@ -35,3 +35,27 @@ void backspace(){
 	getyx(stdscr, y, x);
 	mvdelch(y, x - 1);
 }
+// insert a character and shift line to the right
+void insertchar(char c){
+	getyx(stdscr, y, x);
+	insch(c);
+	move(y, x + 1);	
+}
+// handles all command mode input
+void commandmode(){
+	char command;
+	getmaxyx(stdscr, y, x);
+	mvprintw(y, x, "Entering Command Mode");
+	do{
+		command = getch();
+		move(y, x);
+		switch(command){
+			case 'i':
+			printw("Entering Insert Mode.");
+			return;
+			default:
+			mvprintw(y, x, "Invalid Command");
+			break;
+		}
+	}while(true);
+}
