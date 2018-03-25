@@ -11,6 +11,7 @@ void moveleft();
 void moveright();
 
 void deleteline(); // delete current line
+void backspace(); // delete the character to the left of the cursor
 
 void insertline(); // insert a line at current position
 

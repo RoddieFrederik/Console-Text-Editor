@@ -26,5 +26,12 @@ void deleteline(){
 }
 // insert a line at the current position
 void insertline(){
+	getyx(stdscr, y, x);
 	insertln();
+	move(y + 1, x);
+}
+// delete the character to the left of the cursor
+void backspace(){
+	getyx(stdscr, y, x);
+	mvdelch(y, x - 1);
 }
