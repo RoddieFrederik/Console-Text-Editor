@@ -6,7 +6,7 @@
 int main()
 {
 	initscr();
-	cbreak();	
+	cbreak();
 	noecho();
 	keypad(stdscr, true);
 	/* mode variable is declared in "edit.h"
@@ -28,6 +28,9 @@ int main()
 	// choice: user input
 	// y and x used to track and move cursor
 	int choice, y, x;
+	const int SIZE = 1001;//size of copy array
+	char pasted[SIZE];//array that holds copying data
+	pasted[0] = ';';//keeps you from printing garbage without copying anything first
 	while(true){
 		refresh(); // refresh screen image
 		choice = getch(); // take user input
@@ -36,63 +39,69 @@ int main()
 		if(mode == 'i')
 		switch(choice){
 			case 27:
-			commandmodeon();
-			break;
+                commandmodeon();
+                break;
 			case KEY_LEFT:
-			moveleft();
-			break;
+                moveleft();
+                break;
 			case KEY_RIGHT:
-			moveright();
-			break;	
+                moveright();
+                break;
 			case KEY_UP:
-			moveup();
-			break;
+                moveup();
+                break;
 			case KEY_DOWN:
-			movedown();
-			break;
+                movedown();
+                break;
 			case KEY_BACKSPACE:
 				backspace();
-			break;
+                break;
 			case 10: // 10 = new line character
 			if(mode == 'i')
 				insertline();
-			break;
+                break;
 			default: // if no special cases insert character
 				insertchar(choice);
-			break;
+                break;
 		}
 		//if command mode
 		else
 		switch(choice){
 			case KEY_LEFT:
-			moveleft();
-			break;
+                moveleft();
+                break;
 			case KEY_RIGHT:
-			moveright();
-			break;	
+                moveright();
+                break;
 			case KEY_UP:
-			moveup();
-			break;
+                moveup();
+                break;
 			case KEY_DOWN:
-			movedown();
-			break;
+                movedown();
+                break;
 			case 'I': // disable command mode
-			commandmodeoff();
-			break;
+                commandmodeoff();
+                break;
 			case 'X': // delete current line
-			deleteline();
-			break;
+                deleteline();
+                break;
 			case 'O': // insert new line
-			insertline();
-			break;
+                insertline();
+                break;
+            case 'C': //copy text
+                copyPaste('c', SIZE, pasted);
+                break;
+            case 'P': //paste text
+                copyPaste('p', SIZE, pasted);
+                break;
 			default: // invalid
-			mvprintw(31, 0, "Invalid Command.");
-			move(y, x);
-			break;
+                mvprintw(31, 0, "Invalid Command.");
+                move(y, x);
+                break;
 		}
 	}
 	endwin();
-	
+
 	fclose(file);
 	return 0;
 }
