@@ -1,6 +1,11 @@
-foo: foo.o
-	gcc foo.o -o foo -lncurses
-foo.o: foo.c
-	gcc -c foo.c
+CC=gcc
+LIBS=-lncurses
+
+main: main.o edit.o
+	$(CC) -o main main.o edit.o $(LIBS)
+main.o: main.c
+	$(CC) -c main.c 
+edit.o: edit.c
+	$(CC) -c edit.c
 clean:
-	rm -rf *.out *.o
+	rm -rf main *.o
