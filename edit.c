@@ -27,8 +27,8 @@ void deleteline(){
 // insert a line at the current position
 void insertline(){
 	getyx(stdscr, y, x);
+	move(y + 1, 0);
 	insertln();
-	move(y + 1, x);
 }
 // delete the character to the left of the cursor
 void backspace(){
@@ -43,6 +43,8 @@ void insertchar(char c){
 }
 // enable command mode
 void commandmodeon(){
+	wclear(stdscr);
+	printw("%s\n", buffer); 
 	getyx(stdscr, y, x);
 	move(30, 0);
 	deleteline();
@@ -60,4 +62,3 @@ void commandmodeoff(){
 	move(y, x);
 	mode = 'i';
 }
-	
