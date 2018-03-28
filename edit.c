@@ -47,7 +47,9 @@ void commandmodeon(){
 	getyx(stdscr, y, x);
 	move(30, 0);
 	deleteline();
-	printw("Command Mode: 'I': Enable Insert Mode 'X': Delete Line 'O': Insert Line 'S': Save File");
+
+
+	printw("Command Mode: 'I': Enable Insert Mode 'X': Delete Line 'O': Insert Line 'S': Save File 'C': Copy Text 'P': Paste Text");
 	move(y, x);
 	mode = 'c';
 }
@@ -63,7 +65,7 @@ void commandmodeoff(){
 }
 //saves contents of user entered data or prints it out based on arguments
 void copyPaste(char choice, int SIZE, char pasted[]){
-    if(choice = 'c'){
+    if(choice == 'c'){
         printw("Enter text to copy (end with ';'): ");//prompt for copy text
 
         for(int i = 0; i <= SIZE - 1; i++){
@@ -79,7 +81,7 @@ void copyPaste(char choice, int SIZE, char pasted[]){
             }
         }
     }//copy
-    else if(choice = 'p'){
+    else if(choice == 'p'){
         for(int i = 0; i < SIZE - 1; i++){
             if(pasted[i] == ';'){//check for end line char
                 i = SIZE;//double assurance for falling out of loop
